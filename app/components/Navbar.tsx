@@ -6,7 +6,7 @@ import { Shield } from 'lucide-react';
 
 export default function Navbar() {
   const pathname = usePathname();
-  const isActive = (href) => pathname === href;
+  const isActive = (href: string) => pathname === href;
 
   return (
     <nav className="sticky top-0 z-50 shadow-lg" style={{ backgroundColor: '#0F1F3D' }}>
@@ -17,7 +17,7 @@ export default function Navbar() {
             <span className="text-2xl font-extrabold text-white">Webxact</span>
           </Link>
           <div className="hidden md:flex items-center space-x-1">
-            {[['/', 'Home'], ['/about', 'About'], ['/contact', 'Contact'], ['/privacy', 'Privacy'], ['/terms', 'Terms']].map(([href, label]) => (
+            {([['/', 'Home'], ['/about', 'About'], ['/contact', 'Contact'], ['/privacy', 'Privacy'], ['/terms', 'Terms']] as [string, string][]).map(([href, label]) => (
               <Link key={href} href={href} className="px-4 py-2 rounded-md text-sm font-medium transition-colors" style={{ color: isActive(href) ? '#93C5FD' : '#CBD5E1' }}>
                 {label}
               </Link>
