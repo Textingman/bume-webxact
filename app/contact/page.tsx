@@ -56,12 +56,10 @@ export default function ContactPage() {
                   <label className="block text-sm font-medium mb-1" style={{ color: '#1F2937' }}>Subject *</label>
                   <select name="subject" required value={formData.subject} onChange={handleChange} className="block w-full px-4 py-3 rounded-lg text-gray-900" style={{ border: '1px solid #E5E7EB' }}>
                     <option value="">Select a topic...</option>
-                    <option value="general">General Inquiry</option>
-                    <option value="sms-optout">SMS Opt-Out Request</option>
-                    <option value="sms-help">SMS Help</option>
-                    <option value="privacy">Privacy / Data Request</option>
-                    <option value="other">Other</option>
-                  </select>
+                     <option value="sales">Sales</option>
+                     <option value="support">Customer Support</option>
+                     <option value="general">General Inquiry</option>
+                   </select>
                 </div>
                 <div>
                   <label className="block text-sm font-medium mb-1" style={{ color: '#1F2937' }}>Message *</label>
