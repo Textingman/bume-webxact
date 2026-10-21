@@ -1,229 +1,228 @@
 import Link from 'next/link';
-import { Shield, Lock, Eye, AlertTriangle, CheckCircle, Zap, Users, TrendingDown, Award, Building2 } from 'lucide-react';
+import { Shield, Lock, Eye, AlertTriangle, CheckCircle, Globe, CreditCard, Phone, Zap, Building2, Users, Bell, FileCheck } from 'lucide-react';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen" style={{ backgroundColor: '#FFFFFF' }}>
+    <div className="min-h-screen bg-white" style={{ fontFamily: 'Inter, sans-serif' }}>
       <Navbar />
 
-      {/* Alert Banner */}
-      <div className="text-white text-center py-3 px-4 text-sm" style={{ backgroundColor: '#1A3A6B' }}>
-        <span className="font-medium">Identity theft costs employers $5,000+ per affected employee — </span>
-        <Link href="/signup" className="underline hover:no-underline font-semibold">Protect Your Team Today »</Link>
-      </div>
-
-      {/* Dark Hero — Employer Focused */}
-      <section className="relative overflow-hidden py-24" style={{ background: 'linear-gradient(135deg, #0F1F3D 0%, #1A3A6B 60%, #1e4080 100%)' }}>
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-10 left-10 w-64 h-64 rounded-full" style={{ background: 'radial-gradient(circle, #3B82F6, transparent)' }} />
-          <div className="absolute bottom-10 right-10 w-96 h-96 rounded-full" style={{ background: 'radial-gradient(circle, #1A3A6B, transparent)' }} />
+      {/* ── HERO ── */}
+      <section className="relative overflow-hidden py-24 lg:py-32" style={{ background: 'linear-gradient(135deg, #101F3D 0%, #19345F 60%, #1e3d6e 100%)' }}>
+        {/* Concentric protection rings */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          <div className="absolute top-1/2 right-0 -translate-y-1/2 translate-x-1/4 w-[600px] h-[600px] rounded-full border opacity-10" style={{ borderColor: '#93C5FD' }} />
+          <div className="absolute top-1/2 right-0 -translate-y-1/2 translate-x-1/4 w-[480px] h-[480px] rounded-full border opacity-8" style={{ borderColor: '#3B82F6' }} />
+          <div className="absolute top-1/2 right-0 -translate-y-1/2 translate-x-1/4 w-[360px] h-[360px] rounded-full border opacity-6" style={{ borderColor: '#93C5FD' }} />
+          {/* Subtle network dots */}
+          <div className="absolute top-20 left-20 w-2 h-2 rounded-full opacity-20" style={{ backgroundColor: '#93C5FD' }} />
+          <div className="absolute top-40 left-40 w-1 h-1 rounded-full opacity-15" style={{ backgroundColor: '#3B82F6' }} />
+          <div className="absolute bottom-20 left-32 w-2 h-2 rounded-full opacity-20" style={{ backgroundColor: '#93C5FD' }} />
         </div>
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <div className="relative max-w-6xl mx-auto px-6 lg:px-12">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
+            {/* Left: Text */}
             <div>
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold mb-8" style={{ backgroundColor: 'rgba(59,130,246,0.2)', color: '#93C5FD' }}>
-                <Building2 className="w-4 h-4" />
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold mb-8" style={{ backgroundColor: 'rgba(59,130,246,0.2)', color: '#93C5FD', fontFamily: 'Inter, sans-serif' }}>
+                <Shield className="w-4 h-4" />
                 Employee Identity Protection Benefit
               </div>
-              <h1 className="text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-6">
-                Protect Your Employees.<br />
-                <span style={{ color: '#93C5FD' }}>Protect Your Business.</span>
+
+              <h1 style={{ fontFamily: 'Manrope, sans-serif', fontWeight: 800, fontSize: 'clamp(2.5rem, 5.5vw, 4.25rem)', lineHeight: 1.05, marginBottom: '1.5rem' }}>
+                <span style={{ color: '#FFFFFF', display: 'block' }}>Protect Your Employees.</span>
+                <span style={{ color: '#93C5FD', display: 'block' }}>Protect Your Business.</span>
               </h1>
-              <p className="text-xl mb-10" style={{ color: '#CBD5E1' }}>
-                Identity theft affects 1 in 3 employees — costing them hundreds of hours and thousands of dollars to recover. Webxact gives every employee comprehensive identity protection as a workplace benefit.
+
+              <p style={{ fontSize: '1.1rem', lineHeight: 1.75, color: 'rgba(255,255,255,0.7)', marginBottom: '2.5rem', maxWidth: '520px' }}>
+                Give your team access to identity theft protection as a workplace benefit. Help employees navigate identity risks with greater confidence and peace of mind.
               </p>
+
               <div className="flex flex-wrap gap-4">
-                <Link href="/signup" className="px-8 py-4 text-white text-lg font-bold rounded-lg transition-opacity hover:opacity-90" style={{ backgroundColor: '#3B82F6' }}>
+                <Link href="/signup"
+                  className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl text-white font-semibold transition-opacity hover:opacity-90"
+                  style={{ backgroundColor: '#3B82F6', fontFamily: 'Inter, sans-serif', fontSize: '1rem' }}>
                   Request a Proposal
                 </Link>
-                <Link href="/about" className="px-8 py-4 text-lg font-semibold rounded-lg transition-opacity hover:opacity-90" style={{ color: '#93C5FD', border: '2px solid #93C5FD', backgroundColor: 'transparent' }}>
+                <Link href="/about"
+                  className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl font-semibold transition-opacity hover:opacity-90"
+                  style={{ border: '2px solid rgba(147,197,253,0.5)', color: '#93C5FD', fontFamily: 'Inter, sans-serif', fontSize: '1rem', backgroundColor: 'transparent' }}>
                   Learn More
                 </Link>
               </div>
             </div>
-            {/* Shield Visual */}
-            <div className="flex justify-center">
-              <div className="relative">
-                <div className="w-64 h-64 rounded-full flex items-center justify-center" style={{ background: 'radial-gradient(circle, rgba(59,130,246,0.3), rgba(26,58,107,0.5))', border: '2px solid rgba(147,197,253,0.3)' }}>
-                  <Shield className="w-32 h-32" style={{ color: '#93C5FD' }} />
+
+            {/* Right: Shield visualization */}
+            <div className="flex justify-center lg:justify-end">
+              <div className="relative w-80 h-80 flex items-center justify-center">
+                {/* Outer rings */}
+                <div className="absolute inset-0 rounded-full border-2 opacity-15" style={{ borderColor: '#93C5FD' }} />
+                <div className="absolute inset-8 rounded-full border opacity-12" style={{ borderColor: '#3B82F6' }} />
+                <div className="absolute inset-16 rounded-full border opacity-10" style={{ borderColor: '#93C5FD' }} />
+                {/* Center shield */}
+                <div className="relative w-40 h-40 rounded-3xl flex items-center justify-center shadow-2xl" style={{ background: 'linear-gradient(135deg, #19345F, #101F3D)', border: '1px solid rgba(147,197,253,0.3)' }}>
+                  <Shield className="w-20 h-20" style={{ color: '#93C5FD' }} />
                 </div>
-                <div className="absolute -top-4 -right-4 bg-green-500 text-white text-xs font-bold px-3 py-1 rounded-full">ACTIVE</div>
-                <div className="absolute -bottom-4 -left-4 text-white text-xs font-bold px-3 py-1 rounded-full" style={{ backgroundColor: '#3B82F6' }}>24/7 MONITORING</div>
+                {/* Floating icons */}
+                <div className="absolute top-8 right-8 w-10 h-10 rounded-xl flex items-center justify-center" style={{ backgroundColor: 'rgba(59,130,246,0.3)', border: '1px solid rgba(147,197,253,0.3)' }}>
+                  <Eye className="w-5 h-5" style={{ color: '#93C5FD' }} />
+                </div>
+                <div className="absolute bottom-8 left-8 w-10 h-10 rounded-xl flex items-center justify-center" style={{ backgroundColor: 'rgba(59,130,246,0.3)', border: '1px solid rgba(147,197,253,0.3)' }}>
+                  <Bell className="w-5 h-5" style={{ color: '#93C5FD' }} />
+                </div>
+                <div className="absolute top-8 left-12 w-10 h-10 rounded-xl flex items-center justify-center" style={{ backgroundColor: 'rgba(59,130,246,0.3)', border: '1px solid rgba(147,197,253,0.3)' }}>
+                  <Lock className="w-5 h-5" style={{ color: '#93C5FD' }} />
+                </div>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Stats Bar */}
-      <section className="py-12 border-b" style={{ backgroundColor: '#F8FAFC', borderColor: '#E2E8F0' }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-            {[
-              { value: '1 in 3', label: 'Employees affected by identity theft' },
-              { value: '$5,000+', label: 'Average cost per affected employee' },
-              { value: '200 hrs', label: 'Average recovery time per incident' },
-              { value: '15M+', label: 'Employees protected by Webxact' },
-            ].map((stat) => (
-              <div key={stat.label}>
-                <div className="text-3xl font-extrabold mb-1" style={{ color: '#1A3A6B' }}>{stat.value}</div>
-                <div className="text-sm font-medium" style={{ color: '#6B7280' }}>{stat.label}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Why Employers Choose Webxact */}
-      <section className="py-20" style={{ backgroundColor: '#FFFFFF' }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4" style={{ color: '#0F1F3D' }}>
-              Employers Who Care Choose Webxact.
+      {/* ── WHY IDENTITY PROTECTION MATTERS ── */}
+      <section className="py-20" style={{ backgroundColor: '#EFF6FF' }}>
+        <div className="max-w-6xl mx-auto px-6 lg:px-12">
+          <div className="text-center mb-14">
+            <h2 style={{ fontFamily: 'Manrope, sans-serif', fontWeight: 700, fontSize: 'clamp(1.75rem, 3.5vw, 2.75rem)', color: '#101F3D', marginBottom: '1rem' }}>
+              Why identity protection matters
             </h2>
-            <p className="text-xl max-w-3xl mx-auto" style={{ color: '#6B7280' }}>
-              Identity theft doesn&apos;t just hurt employees — it hurts your business. Distracted, stressed employees cost you productivity, focus, and retention.
+            <p style={{ fontSize: '1.05rem', color: '#475569', maxWidth: '520px', margin: '0 auto', lineHeight: 1.7 }}>
+              Identity theft affects employees across all income levels — and the impact extends directly into the workplace.
             </p>
           </div>
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
-              {
-                icon: TrendingDown,
-                title: 'Reduce Productivity Loss',
-                desc: 'Employees dealing with identity theft spend an average of 200 hours resolving it — on company time. Webxact handles recovery so they can focus on work.',
-              },
-              {
-                icon: Users,
-                title: 'Boost Retention & Loyalty',
-                desc: 'Employees who feel protected by their employer are more loyal and engaged. Identity protection is a high-value, low-cost benefit that employees love.',
-              },
-              {
-                icon: Award,
-                title: 'Trusted by Leading Employers',
-                desc: 'Over 15 million employees are protected by Webxact. Join the employers who take their team&apos;s financial security seriously.',
-              },
-            ].map((feature) => (
-              <div key={feature.title} className="p-8 rounded-xl border hover:shadow-lg transition-shadow" style={{ borderColor: '#E2E8F0' }}>
-                <div className="w-14 h-14 rounded-xl flex items-center justify-center mb-6" style={{ backgroundColor: '#EEF2FF' }}>
-                  <feature.icon className="w-7 h-7" style={{ color: '#1A3A6B' }} />
+              { icon: Globe, title: 'Personal information exposure', desc: 'Employee data appears in data breaches, dark web marketplaces, and phishing campaigns every day.' },
+              { icon: CreditCard, title: 'Financial disruption', desc: 'Identity theft can damage credit, drain accounts, and create financial stress that affects work performance.' },
+              { icon: AlertTriangle, title: 'Recovery complexity', desc: 'Resolving identity theft takes significant time and effort — often during work hours.' },
+              { icon: Users, title: 'Employee peace of mind', desc: 'Employees who feel protected are more focused, less stressed, and more engaged at work.' },
+            ].map((card) => (
+              <div key={card.title} className="p-6 rounded-2xl bg-white border" style={{ borderColor: '#E2E8F0' }}>
+                <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-4" style={{ backgroundColor: '#EFF6FF' }}>
+                  <card.icon className="w-6 h-6" style={{ color: '#3B82F6', strokeWidth: 1.75 }} />
                 </div>
-                <h3 className="text-xl font-bold mb-3" style={{ color: '#0F1F3D' }}>{feature.title}</h3>
-                <p style={{ color: '#6B7280' }}>{feature.desc}</p>
+                <h3 style={{ fontFamily: 'Manrope, sans-serif', fontWeight: 700, fontSize: '1rem', color: '#101F3D', marginBottom: '0.5rem' }}>{card.title}</h3>
+                <p style={{ fontSize: '0.875rem', color: '#475569', lineHeight: 1.6 }}>{card.desc}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* What Employees Get */}
-      <section className="py-20" style={{ backgroundColor: '#F8FAFC' }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* ── PROTECTION FEATURES ── */}
+      <section className="py-20 bg-white">
+        <div className="max-w-6xl mx-auto px-6 lg:px-12">
+          <div className="text-center mb-14">
+            <h2 style={{ fontFamily: 'Manrope, sans-serif', fontWeight: 700, fontSize: 'clamp(1.75rem, 3.5vw, 2.75rem)', color: '#101F3D', marginBottom: '1rem' }}>
+              What every employee gets
+            </h2>
+            <p style={{ fontSize: '1.05rem', color: '#475569', maxWidth: '520px', margin: '0 auto', lineHeight: 1.7 }}>
+              Comprehensive identity protection — active from day one of enrollment.
+            </p>
+          </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[
+              { icon: Globe, title: 'Identity monitoring', desc: 'Continuous monitoring of personal information across the internet and dark web.' },
+              { icon: Bell, title: 'Alerts and notifications', desc: 'Timely alerts when suspicious activity or potential threats are detected.' },
+              { icon: FileCheck, title: 'Identity recovery assistance', desc: 'Dedicated support to help employees navigate identity recovery if needed.' },
+              { icon: Shield, title: 'Fraud support', desc: 'Guidance and resources to help employees respond to fraud and identity theft.' },
+              { icon: Lock, title: 'Credit monitoring', desc: 'Monitoring for changes across major credit bureaus with alert notifications.' },
+              { icon: Eye, title: 'Dark web scanning', desc: 'Scanning for employee personal information on dark web forums and databases.' },
+            ].map((item) => (
+              <div key={item.title} className="p-6 rounded-2xl border hover:shadow-md transition-shadow" style={{ borderColor: '#E2E8F0' }}>
+                <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-4" style={{ backgroundColor: '#EFF6FF' }}>
+                  <item.icon className="w-6 h-6" style={{ color: '#3B82F6', strokeWidth: 1.75 }} />
+                </div>
+                <h3 style={{ fontFamily: 'Manrope, sans-serif', fontWeight: 700, fontSize: '1rem', color: '#101F3D', marginBottom: '0.5rem' }}>{item.title}</h3>
+                <p style={{ fontSize: '0.875rem', color: '#475569', lineHeight: 1.6 }}>{item.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── HOW WEBXACT WORKS ── */}
+      <section className="py-20" style={{ backgroundColor: '#EFF6FF' }}>
+        <div className="max-w-6xl mx-auto px-6 lg:px-12">
+          <div className="text-center mb-14">
+            <h2 style={{ fontFamily: 'Manrope, sans-serif', fontWeight: 700, fontSize: 'clamp(1.75rem, 3.5vw, 2.75rem)', color: '#101F3D', marginBottom: '1rem' }}>
+              How Webxact works
+            </h2>
+            <p style={{ fontSize: '1.05rem', color: '#475569', maxWidth: '480px', margin: '0 auto', lineHeight: 1.7 }}>
+              Simple for employers to introduce. Easy for employees to access.
+            </p>
+          </div>
+          <div className="grid md:grid-cols-3 gap-8 relative">
+            <div className="hidden md:block absolute top-10 left-1/4 right-1/4 h-px" style={{ backgroundColor: '#3B82F6', opacity: 0.3 }} />
+            {[
+              { num: '01', icon: Building2, title: 'Employers introduce the benefit', desc: 'Add Webxact to your employee benefits package. Our team handles setup — no IT required.' },
+              { num: '02', icon: Users, title: 'Employees enroll or activate', desc: 'Employees receive their unique Employee ID and activate their protection in minutes.' },
+              { num: '03', icon: Shield, title: 'Access protection services', desc: 'Employees access the included identity protection services and monitoring features.' },
+            ].map((step) => (
+              <div key={step.num} className="text-center p-8 rounded-2xl bg-white border" style={{ borderColor: '#E2E8F0' }}>
+                <div className="text-5xl font-extrabold mb-4" style={{ color: '#DBEAFE', fontFamily: 'Manrope, sans-serif' }}>{step.num}</div>
+                <div className="w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4" style={{ backgroundColor: '#EFF6FF' }}>
+                  <step.icon className="w-6 h-6" style={{ color: '#3B82F6', strokeWidth: 1.75 }} />
+                </div>
+                <h3 style={{ fontFamily: 'Manrope, sans-serif', fontWeight: 700, fontSize: '1.05rem', color: '#101F3D', marginBottom: '0.75rem' }}>{step.title}</h3>
+                <p style={{ fontSize: '0.9rem', color: '#475569', lineHeight: 1.7 }}>{step.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── BENEFITS FOR EMPLOYERS ── */}
+      <section className="py-20" style={{ background: 'linear-gradient(135deg, #101F3D, #19345F)' }}>
+        <div className="max-w-6xl mx-auto px-6 lg:px-12">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div>
-              <h2 className="text-4xl font-bold mb-6" style={{ color: '#0F1F3D' }}>What Every Employee Gets</h2>
-              <p className="text-lg mb-8" style={{ color: '#6B7280' }}>
-                When you add Webxact to your benefits package, every employee gets comprehensive identity protection — at no out-of-pocket cost to them.
+              <h2 style={{ fontFamily: 'Manrope, sans-serif', fontWeight: 700, fontSize: 'clamp(1.75rem, 3.5vw, 2.75rem)', color: 'white', marginBottom: '1.25rem' }}>
+                Built for employers who care about their people.
+              </h2>
+              <p style={{ fontSize: '1.05rem', color: 'rgba(255,255,255,0.65)', lineHeight: 1.7, marginBottom: '2rem' }}>
+                Webxact is a voluntary employee benefit that helps organizations offer identity protection as part of a competitive benefits package.
               </p>
-              <div className="space-y-4">
-                {[
-                  'Credit monitoring across all 3 bureaus',
-                  'Dark web scanning & breach alerts',
-                  'Social Security number monitoring',
-                  'Bank & investment account alerts',
-                  'Social media account protection',
-                  'Full identity recovery services',
-                  '$1M identity theft insurance',
-                  '24/7 dedicated recovery specialists',
-                ].map((item) => (
-                  <div key={item} className="flex items-center gap-3">
-                    <CheckCircle className="w-5 h-5 flex-shrink-0" style={{ color: '#3B82F6' }} />
-                    <span className="font-medium" style={{ color: '#374151' }}>{item}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div className="rounded-2xl p-10" style={{ background: 'linear-gradient(135deg, #0F1F3D, #1A3A6B)' }}>
-              <h3 className="text-2xl font-bold text-white mb-6">Simple for Employers</h3>
-              <p className="text-lg mb-8" style={{ color: '#CBD5E1' }}>
-                Webxact is designed to be effortless to administer. No IT setup, no complex enrollment — employees activate their own protection in minutes.
-              </p>
-              <div className="space-y-4 mb-8">
-                {[
-                  'No cost to the employer',
-                  'Easy payroll deduction option',
-                  'Employees self-enroll via their ID',
-                  'Instant coverage activation',
-                  'Dedicated HR support team',
-                ].map((item) => (
-                  <div key={item} className="flex items-center gap-3">
-                    <Zap className="w-4 h-4" style={{ color: '#93C5FD' }} />
-                    <span className="text-white font-medium">{item}</span>
-                  </div>
-                ))}
-              </div>
-              <Link href="/signup" className="inline-block w-full text-center font-bold px-8 py-4 rounded-lg text-lg transition-opacity hover:opacity-90" style={{ backgroundColor: '#3B82F6', color: '#FFFFFF' }}>
+              <Link href="/signup"
+                className="inline-block px-7 py-3.5 rounded-xl font-semibold text-white transition-opacity hover:opacity-90"
+                style={{ backgroundColor: '#3B82F6', fontFamily: 'Inter, sans-serif' }}>
                 Request a Proposal
               </Link>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* How It Works */}
-      <section className="py-20" style={{ backgroundColor: '#FFFFFF' }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl font-bold text-center mb-16" style={{ color: '#0F1F3D' }}>How Webxact Works for Employers</h2>
-          <div className="grid md:grid-cols-3 gap-8">
-            {[
-              { step: '01', icon: Building2, title: 'Add to Your Benefits Package', desc: 'Work with our team to add Webxact to your employee benefits. Takes less than a week to set up.' },
-              { step: '02', icon: Users, title: 'Employees Self-Enroll', desc: 'Employees receive their unique Employee ID and activate their own protection in minutes — no IT required.' },
-              { step: '03', icon: Shield, title: 'We Monitor & Protect 24/7', desc: 'Webxact continuously monitors every employee&apos;s identity and handles any recovery — so they can focus on work.' },
-            ].map((step) => (
-              <div key={step.step} className="text-center p-8">
-                <div className="text-6xl font-extrabold mb-4" style={{ color: '#DBEAFE' }}>{step.step}</div>
-                <div className="w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-4" style={{ backgroundColor: '#EEF2FF' }}>
-                  <step.icon className="w-7 h-7" style={{ color: '#1A3A6B' }} />
+            <div className="space-y-4">
+              {[
+                { title: 'Competitive employee benefits', desc: 'Stand out as an employer of choice with a benefit employees genuinely value.' },
+                { title: 'Support for employee financial well-being', desc: 'Help employees protect their financial identity and reduce stress related to identity risks.' },
+                { title: 'Accessible identity protection', desc: 'Remove barriers so employees can access identity protection services with ease.' },
+                { title: 'Straightforward benefit communication', desc: 'Easy to explain, easy to enroll, and easy to manage for HR teams.' },
+              ].map((item) => (
+                <div key={item.title} className="flex items-start gap-4 p-5 rounded-2xl" style={{ backgroundColor: 'rgba(255,255,255,0.06)', border: '1px solid rgba(147,197,253,0.1)' }}>
+                  <CheckCircle className="w-5 h-5 flex-shrink-0 mt-0.5" style={{ color: '#3B82F6' }} />
+                  <div>
+                    <p style={{ fontFamily: 'Manrope, sans-serif', fontWeight: 700, fontSize: '0.95rem', color: 'white', marginBottom: '0.25rem' }}>{item.title}</p>
+                    <p style={{ fontSize: '0.875rem', color: 'rgba(255,255,255,0.55)', lineHeight: 1.6 }}>{item.desc}</p>
+                  </div>
                 </div>
-                <h3 className="text-xl font-bold mb-3" style={{ color: '#0F1F3D' }}>{step.title}</h3>
-                <p style={{ color: '#6B7280' }}>{step.desc}</p>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Testimonials */}
-      <section className="py-20" style={{ background: 'linear-gradient(135deg, #0F1F3D, #1A3A6B)' }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl font-bold text-center text-white mb-12">What Employers Say</h2>
-          <div className="grid md:grid-cols-3 gap-8">
-            {[
-              { quote: 'After one of our employees had their identity stolen, we knew we needed to act. Webxact was the easiest decision we ever made.', name: 'Sarah M.', title: 'HR Director, TechCorp' },
-              { quote: 'Our employees love this benefit. It&apos;s one of the most talked-about perks we offer — and it costs us almost nothing to provide.', name: 'James R.', title: 'VP People, MidWest Manufacturing' },
-              { quote: 'We saw a measurable improvement in employee focus and productivity after adding Webxact. Less stress means better work.', name: 'Linda K.', title: 'Benefits Manager, RetailCo' },
-            ].map((t) => (
-              <div key={t.name} className="p-8 rounded-xl" style={{ backgroundColor: 'rgba(255,255,255,0.08)', border: '1px solid rgba(147,197,253,0.2)' }}>
-                <p className="text-lg mb-6 italic" style={{ color: '#CBD5E1' }}>"{t.quote}"</p>
-                <div>
-                  <p className="font-bold text-white">{t.name}</p>
-                  <p className="text-sm" style={{ color: '#93C5FD' }}>{t.title}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section className="py-20" style={{ backgroundColor: '#F8FAFC' }}>
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <Shield className="w-16 h-16 mx-auto mb-6" style={{ color: '#1A3A6B' }} />
-          <h2 className="text-4xl font-bold mb-6" style={{ color: '#0F1F3D' }}>Ready to Protect Your Team?</h2>
-          <p className="text-xl mb-10" style={{ color: '#6B7280' }}>Join thousands of employers who trust Webxact to protect their most valuable asset — their people.</p>
-          <Link href="/signup" className="inline-block font-bold px-10 py-5 rounded-lg text-xl transition-opacity hover:opacity-90" style={{ backgroundColor: '#1A3A6B', color: '#FFFFFF' }}>
-            Request a Proposal — Free
+      {/* ── FINAL CTA ── */}
+      <section className="py-24" style={{ backgroundColor: '#3B82F6' }}>
+        <div className="max-w-3xl mx-auto px-6 lg:px-12 text-center">
+          <h2 style={{ fontFamily: 'Manrope, sans-serif', fontWeight: 800, fontSize: 'clamp(1.75rem, 4vw, 2.75rem)', color: 'white', marginBottom: '1.25rem' }}>
+            Give your team confidence in their digital lives.
+          </h2>
+          <p style={{ fontSize: '1.1rem', color: 'rgba(255,255,255,0.85)', lineHeight: 1.7, marginBottom: '2.5rem' }}>
+            Explore identity protection benefits for your organization.
+          </p>
+          <Link href="/signup"
+            className="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-semibold text-lg transition-opacity hover:opacity-90"
+            style={{ backgroundColor: '#101F3D', color: '#FFFFFF', fontFamily: 'Inter, sans-serif' }}>
+            Request a Proposal
           </Link>
         </div>
       </section>
