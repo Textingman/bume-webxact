@@ -1,29 +1,23 @@
 @import "tailwindcss";
 
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap');
+
 :root {
-  --background: #ffffff;
-  --foreground: #2F3A40;
-  --primary: #2F3A40;
-  --accent: #3B82F6;
-  --muted: #6B7280;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #2F3A40;
-    --foreground: #ededed;
-  }
+  --midnight: #101F3D;
+  --deep-blue: #19345F;
+  --royal: #3B82F6;
+  --light-blue: #93C5FD;
+  --ice: #EFF6FF;
+  --slate: #475569;
+  --white: #FFFFFF;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Inter', sans-serif;
+  background-color: var(--white);
+  color: var(--slate);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Manrope', sans-serif;
 }
