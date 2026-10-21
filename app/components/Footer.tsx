@@ -8,7 +8,15 @@ export default function Footer() {
         <div className="grid md:grid-cols-4 gap-10 mb-12">
           <div className="md:col-span-2">
             <div className="mb-5">
-              <Image src="/logo.png" alt="Webxact" width={150} height={44} className="h-10 w-auto object-contain" />
+              {/* Invert the blue wordmark to white for the dark footer */}
+              <Image
+                src="/logo.png"
+                alt="Webxact"
+                width={160}
+                height={44}
+                className="h-10 w-auto object-contain"
+                style={{ filter: 'brightness(0) invert(1)', opacity: 0.9 }}
+              />
             </div>
             <p style={{ color: 'rgba(255,255,255,0.55)', fontSize: '0.9rem', lineHeight: 1.7, maxWidth: '280px', fontFamily: 'Inter, sans-serif' }}>
               Identity protection for every employee. Protect your people. Protect your business.
