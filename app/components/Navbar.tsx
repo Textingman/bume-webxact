@@ -21,7 +21,16 @@ export default function Navbar() {
       <div className="max-w-6xl mx-auto px-6 lg:px-12">
         <div className="flex items-center justify-between h-20">
           <Link href="/" className="flex items-center">
-            <Image src="/logo.png" alt="Webxact" width={150} height={44} className="h-10 w-auto object-contain" priority />
+            {/* Blue Shield Wordmark — shown on dark navy background with brightness boost for visibility */}
+            <Image
+              src="/logo.png"
+              alt="Webxact"
+              width={160}
+              height={44}
+              className="h-10 w-auto object-contain"
+              style={{ filter: 'brightness(1.4) saturate(1.2)', opacity: 0.95 }}
+              priority
+            />
           </Link>
           <div className="hidden md:flex items-center gap-1">
             {navLinks.map(({ href, label }) => (
