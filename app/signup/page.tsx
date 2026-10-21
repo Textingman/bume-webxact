@@ -1,126 +1,327 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { useState } from 'react';
-import { Mail, Phone, User } from 'lucide-react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 
+function generateEmployeeId() {
+  const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+  let id = 'WXT-';
+  for (let i = 0; i < 4; i++) id += chars[Math.floor(Math.random() * chars.length)];
+  id += '-';
+  for (let i = 0; i < 4; i++) id += chars[Math.floor(Math.random() * chars.length)];
+  return id;
+}
+
+function isValidEmail(email: string) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+function StepDots({ current, total }: { current: number; total: number }) {
+  return (
+    <div className="flex items-center gap-2 mb-8">
+      {Array.from({ length: total }).map((_, i) => (
+        <div key={i} className="flex items-center gap-2">
+          <div
+            className="w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold transition-all"
+            style={{
+              backgroundColor: i < current ? '#1A3A6B' : i === current ? '#1A3A6B' : '#E5E7EB',
+              color: i <= current ? 'white' : '#9CA3AF',
+              opacity: i < current ? 0.7 : 1,
+            }}
+          >
+            {i < current ? (
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3">
+                <path d="M5 13l4 4L19 7" />
+              </svg>
+            ) : i + 1}
+          </div>
+          {i < total - 1 && (
+            <div className="w-8 h-px" style={{ backgroundColor: i < current ? '#1A3A6B' : '#E5E7EB' }} />
+          )}
+        </div>
+      ))}
+    </div>
+  );
+}
+
 export default function SignupPage() {
-  const [formData, setFormData] = useState({ name: '', email: '', phone: '', message: '' });
-  const [accountNotifications, setAccountNotifications] = useState(false);
-  const [customerCare, setCustomerCare] = useState(false);
+  const [step, setStep] = useState(0);
+  const [formData, setFormData] = useState({ name: '', email: '', company: '', role: '', employeeId: '' });
+  const [emailError, setEmailError] = useState('');
+  const [employeeIdError, setEmployeeIdError] = useState('');
+  const [validEmployeeId, setValidEmployeeId] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [submitted, setSubmitted] = useState(false);
+
+  useEffect(() => {
+    setValidEmployeeId(generateEmployeeId());
+  }, []);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+    if (name === 'email') setEmailError('');
+    if (name === 'employeeId') setEmployeeIdError('');
+  };
+
+  const handleStep0 = () => {
+    if (!formData.name) return;
+    if (!isValidEmail(formData.email)) {
+      setEmailError('Please enter a valid work email address.');
+      return;
+    }
+    setStep(1);
+  };
+
+  const handleStep1 = () => {
+    if (formData.employeeId.trim() !== validEmployeeId) {
+      setEmployeeIdError('Invalid Employee ID. Please check your HR onboarding email and try again.');
+      return;
+    }
+    setStep(2);
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     setTimeout(() => {
       setIsSubmitting(false);
-      setSubmitStatus('success');
-      setFormData({ name: '', email: '', phone: '', message: '' });
+      setSubmitted(true);
     }, 1500);
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+  const steps = [
+    { label: 'Your Info', desc: 'Name & work email' },
+    { label: 'Employee ID', desc: 'Verify your access' },
+    { label: 'Confirm', desc: 'Complete setup' },
+  ];
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: '#FFFFFF' }}>
+    <div className="min-h-screen bg-white">
       <Navbar />
 
-      <section className="py-12" style={{ backgroundColor: '#F5F7FA' }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl font-extrabold mb-4" style={{ color: '#1F2937' }}>
-            Start Your Identity Protection — Today
-          </h1>
-          <p className="text-xl max-w-2xl mx-auto" style={{ color: '#6B7280' }}>
-            Comprehensive identity monitoring and recovery services. Get protected in minutes — no hassle, no risk.
-          </p>
-        </div>
-      </section>
-
-      <section className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="bg-white rounded-2xl shadow-xl p-8 md:p-12" style={{ border: '1px solid #E5E7EB' }}>
-          {submitStatus === 'success' ? (
-            <div className="text-center py-12">
-              <div className="w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6" style={{ backgroundColor: '#D1FAE5' }}>
-                <svg className="w-10 h-10" style={{ color: '#22C55E' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                </svg>
-              </div>
-              <h2 className="text-3xl font-bold mb-4" style={{ color: '#1F2937' }}>Request Received!</h2>
-              <p className="text-lg mb-8" style={{ color: '#6B7280' }}>Your submission has been received. Our team will reach out within 24 hours.</p>
-              <Link href="/" className="inline-block px-6 py-3 text-white font-semibold rounded-lg transition-opacity hover:opacity-90" style={{ backgroundColor: '#1A3A6B' }}>
-                Return to Home
-              </Link>
-            </div>
-          ) : (
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="grid md:grid-cols-2 gap-6">
-                <div>
-                  <label className="block text-sm font-medium mb-2" style={{ color: '#374151' }}>Full Name *</label>
-                  <div className="relative">
-                    <User className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5" style={{ color: '#9CA3AF' }} />
-                    <input type="text" name="name" required value={formData.name} onChange={handleChange} placeholder="Jane Smith" className="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-200 focus:outline-none" style={{ borderColor: '#E5E7EB' }} />
-                  </div>
+      <div className="min-h-screen grid md:grid-cols-2">
+        {/* Left Panel */}
+        <div className="relative hidden md:flex flex-col justify-between p-12 pt-28" style={{ backgroundColor: '#1A3A6B' }}>
+          <div className="absolute inset-0 opacity-10" style={{ background: 'radial-gradient(circle at 30% 70%, white, transparent)' }} />
+          <div className="relative z-10">
+            <p className="text-xs font-semibold uppercase tracking-widest mb-8 opacity-60 text-white">Employee Access</p>
+            <h2 className="text-4xl font-extrabold text-white leading-tight mb-6">
+              Defend your identity. Protect what matters most.
+            </h2>
+            <p className="text-white opacity-70 text-base leading-relaxed max-w-xs">
+              Connect your employee account to access your Webxact benefits — provided by your employer.
+            </p>
+          </div>
+          <div className="relative z-10 space-y-4">
+            {steps.map((s, i) => (
+              <div key={i} className="flex items-center gap-4">
+                <div
+                  className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 text-xs font-bold"
+                  style={{
+                    backgroundColor: i < step ? 'rgba(255,255,255,0.9)' : i === step ? 'rgba(255,255,255,0.25)' : 'rgba(255,255,255,0.1)',
+                    color: i < step ? '#1A3A6B' : 'white',
+                    border: i === step ? '1px solid rgba(255,255,255,0.5)' : 'none',
+                  }}
+                >
+                  {i < step ? (
+                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#1A3A6B" strokeWidth="3">
+                      <path d="M5 13l4 4L19 7" />
+                    </svg>
+                  ) : i + 1}
                 </div>
                 <div>
-                  <label className="block text-sm font-medium mb-2" style={{ color: '#374151' }}>Email Address *</label>
-                  <div className="relative">
-                    <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5" style={{ color: '#9CA3AF' }} />
-                    <input type="email" name="email" required value={formData.email} onChange={handleChange} placeholder="jane@example.com" className="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-200 focus:outline-none" style={{ borderColor: '#E5E7EB' }} />
-                  </div>
+                  <p className="font-semibold text-sm" style={{ color: i <= step ? 'white' : 'rgba(255,255,255,0.45)' }}>{s.label}</p>
+                  <p className="text-xs" style={{ color: 'rgba(255,255,255,0.35)' }}>{s.desc}</p>
                 </div>
               </div>
-              <div>
-                <label className="block text-sm font-medium mb-2" style={{ color: '#374151' }}>Phone Number *</label>
-                <div className="relative">
-                  <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5" style={{ color: '#9CA3AF' }} />
-                  <input type="tel" name="phone" required value={formData.phone} onChange={handleChange} placeholder="(555) 555-5555" className="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-200 focus:outline-none" style={{ borderColor: '#E5E7EB' }} />
-                </div>
-              </div>
-              <div>
-                <label className="block text-sm font-medium mb-2" style={{ color: '#374151' }}>How can we help you?</label>
-                <textarea name="message" rows={4} value={formData.message} onChange={handleChange} placeholder="Tell us about your situation..." className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none" style={{ borderColor: '#E5E7EB' }} />
-              </div>
-
-              {/* Privacy Policy & Terms — checkbox */}
-              <div className="flex items-start gap-3 pt-2">
-                <input type="checkbox" id="termsAgreement" required className="mt-1 w-4 h-4 rounded" style={{ accentColor: '#1A3A6B' }} />
-                <label htmlFor="termsAgreement" className="text-sm" style={{ color: '#6B7280' }}>
-                  I have read and agree to the{' '}
-                  <a href="/privacy" style={{ color: '#1A3A6B' }} className="underline">Privacy Policy</a>
-                  {' '}and{' '}
-                  <a href="/terms" style={{ color: '#1A3A6B' }} className="underline">Terms of Service</a>. *
-                </label>
-              </div>
-
-              {/* SMS Consent Checkboxes */}
-              <div className="space-y-4 pt-2">
-                <div className="flex items-start gap-3">
-                  <input type="checkbox" id="accountNotifications" checked={accountNotifications} onChange={(e) => setAccountNotifications(e.target.checked)} className="mt-1 w-4 h-4 rounded" style={{ accentColor: '#1A3A6B' }} />
-                  <label htmlFor="accountNotifications" className="text-sm" style={{ color: '#6B7280' }}>
-                    By checking this box, I agree to receive Transactional Account Notification SMS messages from Webxact at the phone number provided. I understand I may opt out at any time by replying STOP. Reply HELP for help. Message and data rates may apply. Message frequency varies. Opting in is optional and not required to submit this form. Consent is not required as a condition of purchasing any products or services.
-                  </label>
-                </div>
-                <div className="flex items-start gap-3">
-                  <input type="checkbox" id="customerCare" checked={customerCare} onChange={(e) => setCustomerCare(e.target.checked)} className="mt-1 w-4 h-4 rounded" style={{ accentColor: '#1A3A6B' }} />
-                  <label htmlFor="customerCare" className="text-sm" style={{ color: '#6B7280' }}>
-                    By checking this box, I agree to receive Promotional Marketing SMS messages from Webxact at the phone number provided, including special offers and exclusive updates. I understand I may opt out at any time by replying STOP. Reply HELP for help. Message and data rates may apply. Message frequency varies. Opting in is optional and not required to submit this form. Consent is not required as a condition of purchasing any products or services.
-                  </label>
-                </div>
-              </div>
-
-              <button type="submit" disabled={isSubmitting} className="w-full py-4 text-white text-lg font-semibold rounded-lg transition-opacity hover:opacity-90" style={{ backgroundColor: isSubmitting ? '#9CA3AF' : '#1A3A6B' }}>
-                {isSubmitting ? 'Submitting...' : 'Get Protected Now'}
-              </button>
-            </form>
-          )}
+            ))}
+          </div>
         </div>
-      </section>
+
+        {/* Right Panel: Form */}
+        <div className="flex flex-col justify-center px-6 py-24 md:px-12 lg:px-16 bg-white">
+          <div className="max-w-md w-full mx-auto">
+            {submitted ? (
+              <div className="text-center py-12">
+                <div className="w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6" style={{ backgroundColor: '#DBEAFE' }}>
+                  <svg className="w-10 h-10" style={{ color: '#1A3A6B' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                </div>
+                <h2 className="text-3xl font-extrabold mb-4" style={{ color: '#1A3A6B' }}>You're all set!</h2>
+                <p className="text-lg mb-8 text-gray-500">Your Webxact protection is now active. Check your email for your monitoring dashboard access.</p>
+                <Link href="/" className="inline-block text-white font-bold px-8 py-3 rounded-xl transition-opacity hover:opacity-90" style={{ backgroundColor: '#1A3A6B' }}>
+                  Back to Home
+                </Link>
+              </div>
+            ) : (
+              <>
+                <StepDots current={step} total={3} />
+
+                {/* Step 0: Personal Info */}
+                {step === 0 && (
+                  <>
+                    <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: '#1A3A6B' }}>Step 1 of 3 — Your Information</p>
+                    <h1 className="text-3xl font-extrabold mb-2 text-gray-900">Let's get started.</h1>
+                    <p className="text-gray-500 text-sm leading-relaxed mb-8">Enter your name and work email to begin setting up your account.</p>
+                    <div className="space-y-5">
+                      <div>
+                        <label className="block text-xs font-semibold uppercase tracking-wider mb-2 text-gray-500">Full Name *</label>
+                        <input
+                          type="text" name="name" required value={formData.name} onChange={handleChange}
+                          placeholder="Jane Smith"
+                          className="w-full px-4 py-3 rounded-xl text-sm border focus:outline-none"
+                          style={{ borderColor: '#E5E7EB', color: '#111827' }}
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-xs font-semibold uppercase tracking-wider mb-2 text-gray-500">Work Email *</label>
+                        <input
+                          type="email" name="email" required value={formData.email} onChange={handleChange}
+                          placeholder="jane@company.com"
+                          className="w-full px-4 py-3 rounded-xl text-sm border focus:outline-none"
+                          style={{ borderColor: emailError ? '#DC2626' : '#E5E7EB', color: '#111827' }}
+                        />
+                        {emailError && <p className="text-xs text-red-600 mt-1">{emailError}</p>}
+                      </div>
+                      <div>
+                        <label className="block text-xs font-semibold uppercase tracking-wider mb-2 text-gray-500">Company Name</label>
+                        <input
+                          type="text" name="company" value={formData.company} onChange={handleChange}
+                          placeholder="Acme Corp"
+                          className="w-full px-4 py-3 rounded-xl text-sm border focus:outline-none"
+                          style={{ borderColor: '#E5E7EB', color: '#111827' }}
+                        />
+                      </div>
+                      <button
+                        type="button" onClick={handleStep0}
+                        className="w-full py-3 text-white font-bold rounded-xl transition-opacity hover:opacity-90"
+                        style={{ backgroundColor: '#1A3A6B', opacity: formData.name && formData.email ? 1 : 0.5 }}
+                      >
+                        Continue →
+                      </button>
+                    </div>
+                  </>
+                )}
+
+                {/* Step 1: Employee ID */}
+                {step === 1 && (
+                  <>
+                    <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: '#1A3A6B' }}>Step 2 of 3 — Employee Verification</p>
+                    <h1 className="text-3xl font-extrabold mb-2 text-gray-900">Verify your access.</h1>
+                    <p className="text-gray-500 text-sm leading-relaxed mb-8">
+                      Enter the Employee ID from your HR onboarding email to connect your account to your employer's Webxact plan.
+                    </p>
+                    <div className="space-y-5">
+                      <div>
+                        <label className="block text-xs font-semibold uppercase tracking-wider mb-2 text-gray-500">Employee ID *</label>
+                        <input
+                          type="text" name="employeeId" required value={formData.employeeId} onChange={handleChange}
+                          placeholder={validEmployeeId}
+                          className="w-full px-4 py-3 rounded-xl text-sm border focus:outline-none font-mono tracking-wider"
+                          style={{ borderColor: employeeIdError ? '#DC2626' : '#E5E7EB', color: '#111827' }}
+                        />
+                        {employeeIdError ? (
+                          <p className="text-xs text-red-600 mt-1">{employeeIdError}</p>
+                        ) : (
+                          <p className="text-xs text-gray-400 mt-1">Find your Employee ID in your HR onboarding email or ask your HR team.</p>
+                        )}
+                      </div>
+                      <div className="flex gap-3">
+                        <button
+                          type="button" onClick={() => setStep(0)}
+                          className="px-5 py-3 rounded-xl text-sm font-semibold border transition-colors"
+                          style={{ borderColor: '#E5E7EB', color: '#374151' }}
+                        >
+                          Back
+                        </button>
+                        <button
+                          type="button" onClick={handleStep1}
+                          className="flex-1 py-3 text-white font-bold rounded-xl transition-opacity hover:opacity-90"
+                          style={{ backgroundColor: '#1A3A6B', opacity: formData.employeeId ? 1 : 0.5 }}
+                        >
+                          Verify & Continue →
+                        </button>
+                      </div>
+                    </div>
+                  </>
+                )}
+
+                {/* Step 2: Confirm */}
+                {step === 2 && (
+                  <form onSubmit={handleSubmit}>
+                    <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: '#1A3A6B' }}>Step 3 of 3 — Confirm & Activate</p>
+                    <h1 className="text-3xl font-extrabold mb-2 text-gray-900">Almost there.</h1>
+                    <p className="text-gray-500 text-sm leading-relaxed mb-8">
+                      Review your information and activate your Webxact account.
+                    </p>
+
+                    {/* Summary card */}
+                    <div className="rounded-xl p-5 mb-6 border" style={{ backgroundColor: '#DBEAFE', borderColor: '#1A3A6B33' }}>
+                      <p className="text-xs font-semibold uppercase tracking-wider mb-3" style={{ color: '#1A3A6B' }}>Account Summary</p>
+                      <div className="space-y-2">
+                        <div className="flex justify-between text-sm">
+                          <span className="text-gray-500">Name</span>
+                          <span className="font-semibold text-gray-900">{formData.name}</span>
+                        </div>
+                        <div className="flex justify-between text-sm">
+                          <span className="text-gray-500">Email</span>
+                          <span className="font-semibold text-gray-900">{formData.email}</span>
+                        </div>
+                        {formData.company && (
+                          <div className="flex justify-between text-sm">
+                            <span className="text-gray-500">Company</span>
+                            <span className="font-semibold text-gray-900">{formData.company}</span>
+                          </div>
+                        )}
+                        <div className="flex justify-between text-sm">
+                          <span className="text-gray-500">Employee ID</span>
+                          <span className="font-mono font-semibold text-gray-900">{formData.employeeId}</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Terms only — no SMS */}
+                    <div className="flex items-start gap-3 mb-6">
+                      <input
+                        type="checkbox" id="termsAgreement" required
+                        className="mt-1 w-4 h-4 rounded flex-shrink-0"
+                        style={{ accentColor: '#1A3A6B' }}
+                      />
+                      <label htmlFor="termsAgreement" className="text-xs text-gray-500 leading-relaxed">
+                        I have read and agree to the{' '}
+                        <Link href="/privacy" className="underline" style={{ color: '#1A3A6B' }}>Privacy Policy</Link>
+                        {' '}and{' '}
+                        <Link href="/terms" className="underline" style={{ color: '#1A3A6B' }}>Terms of Service</Link>. *
+                      </label>
+                    </div>
+
+                    <div className="flex gap-3">
+                      <button
+                        type="button" onClick={() => setStep(1)}
+                        className="px-5 py-3 rounded-xl text-sm font-semibold border transition-colors"
+                        style={{ borderColor: '#E5E7EB', color: '#374151' }}
+                      >
+                        Back
+                      </button>
+                      <button
+                        type="submit" disabled={isSubmitting}
+                        className="flex-1 py-3 text-white font-bold rounded-xl transition-opacity hover:opacity-90"
+                        style={{ backgroundColor: isSubmitting ? '#9CA3AF' : '#1A3A6B', cursor: isSubmitting ? 'not-allowed' : 'pointer' }}
+                      >
+                        {isSubmitting ? 'Activating…' : 'Activate My Account →'}
+                      </button>
+                    </div>
+                  </form>
+                )}
+              </>
+            )}
+          </div>
+        </div>
+      </div>
 
       <Footer />
     </div>
