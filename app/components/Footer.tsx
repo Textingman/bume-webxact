@@ -22,7 +22,7 @@ export default function Footer() {
               Identity protection for every employee. Protect your people. Protect your business.
             </p>
             <p className="mt-4 text-sm" style={{ color: 'rgba(255,255,255,0.35)', fontFamily: 'Inter, sans-serif' }}>
-              support@webxact.com<br />8 The Green, Ste A<br />Dover, DE 19901
+              support@webxact.com<br />838 Walker Rd Ste 21-2<br />Dover, DE 19904-2751
             </p>
           </div>
           <div>

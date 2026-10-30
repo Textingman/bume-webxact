@@ -48,7 +48,7 @@ export default function PrivacyPage() {
           <p className="mb-6" style={{ color: '#6B7280' }}>
             If you have questions about this Privacy Policy, please contact us at:<br />
             Webxact<br />
-            8 The Green, Ste A, Dover, DE 19901<br />
+            838 Walker Rd Ste 21-2, Dover, DE 19904-2751<br />
             Email: <a href="mailto:support@webxact.com" style={{ color: '#1A3A6B' }}>support@webxact.com</a>
           </p>
         </div>

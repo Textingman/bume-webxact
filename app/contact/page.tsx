@@ -82,7 +82,7 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <h3 className="text-sm font-semibold uppercase tracking-wide mb-1" style={{ color: '#9CA3AF' }}>Mailing Address</h3>
-                  <p style={{ color: '#6B7280' }}>Webxact<br />8 The Green, Ste A<br />Dover, DE 19901</p>
+                  <p style={{ color: '#6B7280' }}>Webxact<br />838 Walker Rd Ste 21-2<br />Dover, DE 19904-2751</p>
                 </div>
                 <div>
                   <h3 className="text-sm font-semibold uppercase tracking-wide mb-1" style={{ color: '#9CA3AF' }}>SMS Support</h3>
